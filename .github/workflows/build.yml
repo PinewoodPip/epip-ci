@@ -2,7 +2,7 @@ name: Create Pak
 run-name: Create Pak
 on: [workflow_dispatch]
 jobs:
-  Explore-GitHub-Actions:
+  Build-Pak:
     runs-on: windows-latest
     steps:
       - name: Check out repository code
@@ -23,6 +23,8 @@ jobs:
           filename: "ExportTool.zip"
       - name: Extract LSLib
         run: 7z x public/ExportTool.zip -opublic/LSLib
+      - run: ls public
+      - run: ls
       - name: Pak mod
         run: public/LSLib/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package
       - name: Create artifact
