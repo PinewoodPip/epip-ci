@@ -11,8 +11,8 @@ jobs:
           name: PinewoodPip/EpipEncounters
           path: "repository/"
           sparse-checkout: |
-            "Mods"
-            "Public"
+            Mods
+            Public
       - run: echo "Cloned repository"
       - name: Download LSLib
         uses: suisei-cn/actions-download-file@v1.3.0
