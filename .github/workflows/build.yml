@@ -1,0 +1,31 @@
+name: Create Pak
+run-name: Create Pak
+on: [workflow_dispatch]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          path: "repository/"
+          sparse-checkout: |
+            "Mods"
+            "Public"
+      - run: echo "Cloned repository"
+      - name: Download LSLib
+        uses: suisei-cn/actions-download-file@v1.3.0
+        id: ExportTool
+        with:
+          url: "https://github.com/Norbyte/lslib/releases/download/v1.18.5/ExportTool-v1.18.5.zip"
+          target: public/
+          filename: "ExportTool.zip"
+      - name: Extract LSLib
+        run: 7z x public/ExportTool.zip -opublic/LSLib
+      - name: Pak mod
+        run: public/LSLib/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package
+      - name: Create artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Mod Pak
+          path: EpipEncounters_CI.pak
