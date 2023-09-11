@@ -8,6 +8,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
+          name: PinewoodPip/EpipEncounters
           path: "repository/"
           sparse-checkout: |
             "Mods"
