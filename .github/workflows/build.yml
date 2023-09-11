@@ -25,8 +25,12 @@ jobs:
         run: 7z x public/ExportTool.zip -opublic/LSLib
       - run: ls public
       - run: ls
+      - run: Remove-Item -LiteralPath 'repository/.git' -Force -Recurse
+      - run: Remove-Item -LiteralPath 'repository/.gitattributes' -Force
+      - run: Remove-Item -LiteralPath 'repository/.gitignore' -Force
+      - run: Remove-Item -LiteralPath 'repository/README.md' -Force
       - name: Pak mod
-        run: public/LSLib/ExportTool-v1.18.5/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package
+        run: public/LSLib/ExportTool-v1.18.5/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package -c zlib
       - name: Create artifact
         uses: actions/upload-artifact@v3
         with:
