@@ -26,7 +26,7 @@ jobs:
       - run: ls public
       - run: ls
       - name: Pak mod
-        run: public/LSLib/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package
+        run: public/LSLib/ExportTool-v1.18.5/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package
       - name: Create artifact
         uses: actions/upload-artifact@v3
         with:
