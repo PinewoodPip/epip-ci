@@ -21,14 +21,34 @@ jobs:
           url: "https://github.com/Norbyte/lslib/releases/download/v1.18.5/ExportTool-v1.18.5.zip"
           target: public/
           filename: "ExportTool.zip"
+      - name: Download gitignored assets (UI textures)
+        uses: suisei-cn/actions-download-file@v1.3.0
+        id: UIAssets
+        with:
+          url: "https://www.dropbox.com/scl/fi/2p8i3i33ucsc9vt9ng33e/UI.zip?rlkey=nejvbjcd55c11ayinh4wbj3z7&dl=1"
+          target: public/
+          filename: "UI.zip"
+      - name: Download gitignored assets (UI texture lsfs)
+        uses: suisei-cn/actions-download-file@v1.3.0
+        id: UIAssetsLsf
+        with:
+          url: "https://www.dropbox.com/scl/fi/qynk4f6x7kpfod6jyd5mr/UI_lsf.zip?rlkey=3npg43anj0vibghfb6mxf0aq1&dl=1"
+          target: public/
+          filename: "UI_Lsf.zip"
       - name: Extract LSLib
         run: 7z x public/ExportTool.zip -opublic/LSLib
-      - run: ls public
-      - run: ls
-      - run: Remove-Item -LiteralPath 'repository/.git' -Force -Recurse
-      - run: Remove-Item -LiteralPath 'repository/.gitattributes' -Force
-      - run: Remove-Item -LiteralPath 'repository/.gitignore' -Force
-      - run: Remove-Item -LiteralPath 'repository/README.md' -Force
+      - name: Extract UI textures
+        run: 7z x public/UI.zip -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Assets/Textures/UI
+      - name: Extract UI LSFs
+        run: 7z x public/UI_Lsf.zip -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Content/[PAK]_UI
+      - run: ls repository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Assets/Textures/UI
+      - run: ls repository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Content/[PAK]_UI
+      - name: Remove git files
+        run: |
+          Remove-Item -LiteralPath 'repository/.git' -Force -Recurse
+          Remove-Item -LiteralPath 'repository/.gitattributes' -Force
+          Remove-Item -LiteralPath 'repository/.gitignore' -Force
+          Remove-Item -LiteralPath 'repository/README.md' -Force
       - name: Pak mod
         run: public/LSLib/ExportTool-v1.18.5/Tools/divine.exe -s $env:GITHUB_WORKSPACE/repository -g dos2de -d $env:GITHUB_WORKSPACE/EpipEncounters_CI.pak -a create-package -c zlib
       - name: Create artifact
