@@ -38,9 +38,9 @@ jobs:
       - name: Extract LSLib
         run: 7z x public/ExportTool.zip -opublic/LSLib
       - name: Extract UI textures
-        run: 7z x public/UI.zip -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Assets/Textures/UI
+        run: 7z x public/UI.zip -y -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Assets/Textures/UI
       - name: Extract UI LSFs
-        run: 7z x public/UI_Lsf.zip -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Content/[PAK]_UI
+        run: 7z x public/UI_Lsf.zip -y -orepository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Content/[PAK]_UI
       - run: ls repository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Assets/Textures/UI
       - run: ls repository/Public/EpipEncounters_7d32cb52-1cfd-4526-9b84-db4867bf9356/Content/[PAK]_UI
       - name: Remove git files
